@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}{{ bike.name }}{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col-md-6">{% if bike.image %}<img src="{{ bike.image.url }}" class="img-fluid">{% endif %}</div>
+  <div class="col-md-6">
+    <h2>{{ bike.name }}</h2>
+    <p>{{ bike.description }}</p>
+    <p><strong>₹{{ bike.hourly_rate }}</strong> / hour</p>
+  </div>
+</div>
+{% endblock %}

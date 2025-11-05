@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Rental Bikes | The Shore House{% endblock %}
+{% block content %}
+
+<!-- HERO (compact, matching About style) -->
+<section class="relative h-56 md:h-72 flex items-center justify-center overflow-hidden">
+  <img src="https://images.unsplash.com/photo-1532298229144-0ec0c57515c7" class="absolute inset-0 w-full h-full object-cover" alt="Bikes Banner">
+  <div class="absolute inset-0 hero-tint"></div>
+  <div class="absolute inset-0 bg-black/20"></div>
+
+  <div class="relative z-10 text-center text-white">
+    <h1 class="text-4xl md:text-5xl font-semibold">Explore on Two Wheels</h1>
+    <p class="mt-2 text-sm md:text-base text-gray-100 max-w-xl mx-auto">
+      Ride along the coast with our premium bikes — comfort, style, and adventure on every turn.
+    </p>
+  </div>
+</section>
+
+<!-- BIKE SHOWCASE -->
+<section class="bg-gray-100 text-slate-800 py-20 space-y-20">
+  <div class="max-w-7xl mx-auto space-y-20">
+    {% for bike in bikes %}
+      <div class="flex flex-col md:flex-row {% if forloop.counter|divisibleby:2 %}md:flex-row-reverse{% endif %} items-center gap-8" data-aos="fade-up">
+
+        <!-- IMAGE -->
+        <div class="md:w-1/2 h-96 overflow-hidden rounded-2xl shadow-lg">
+          {% if bike.images.all %}
+            <a href="{{ bike.images.first.image.url }}" class="glightbox" data-gallery="bike-{{ bike.id }}">
+              <img src="{{ bike.images.first.image.url }}?w=1600&q=80&auto=format&fit=crop" alt="{{ bike.name }}"
+                   class="w-full h-full object-cover transition-transform duration-700 hover:scale-105">
+            </a>
+            {% for img in bike.images.all %}
+              <a href="{{ img.image.url }}" class="glightbox hidden" data-gallery="bike-{{ bike.id }}"></a>
+            {% endfor %}
+          {% else %}
+            <img src="https://images.unsplash.com/photo-1532298229144-0ec0c57515c7?w=1600&q=80&auto=format&fit=crop" alt="{{ bike.title }}" class="w-full h-full object-cover">
+          {% endif %}
+        </div>
+
+        <!-- CONTENT -->
+        <div class="md:w-1/2 glass-card p-10 rounded-2xl shadow-lg">
+          <h2 class="text-3xl font-semibold text-slate-800">{{ bike.name }}</h2>
+          <p class="mt-4 text-slate-600 leading-relaxed">{{ bike.description|linebreaksbr }}</p>
+
+          <div class="mt-6 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+{#              <a href="{% url 'booking:book_service' 'bike' bike.id %}" class="btn-gold">Book Now →</a>#}
+              <a href="{% url 'bikes:detail' bike.id %}" class="text-slate-700 hover:text-yellow-600 underline">Details</a>
+            </div>
+            <div class="text-slate-700 font-semibold">₹{{ bike.price_per_day }} / day</div>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <p class="text-center text-slate-600">No bikes available right now.</p>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- GLightbox Integration -->
+<link href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    GLightbox({
+      selector: '.glightbox',
+      touchNavigation: true,
+      loop: true,
+      zoomable: true,
+    });
+  });
+</script>
+
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Apply Coupon{% endblock %}
+{% block content %}
+<h3>Apply Coupon</h3>
+<form method="POST">
+  {% csrf_token %}
+  <div class="mb-3">
+    <label>Coupon Code</label>
+    <input type="text" name="code" class="form-control" required>
+  </div>
+  <button class="btn btn-primary" type="submit">Apply</button>
+</form>
+{% if message %}
+<div class="alert alert-info mt-3">{{ message }}</div>
+{% endif %}
+{% endblock %}

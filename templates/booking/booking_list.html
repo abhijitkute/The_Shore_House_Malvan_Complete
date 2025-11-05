@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Bookings{% endblock %}
+{% block content %}
+<h2>Bookings</h2>
+<div class="list-group">
+  {% for b in bookings %}
+    <a class="list-group-item list-group-item-action" href="{% url 'bookings:detail' b.id %}">
+      {{ b.reference }} — ₹{{ b.final_amount }} — {{ b.created_at }}
+    </a>
+  {% empty %}
+    <p>No bookings yet.</p>
+  {% endfor %}
+</div>
+{% endblock %}

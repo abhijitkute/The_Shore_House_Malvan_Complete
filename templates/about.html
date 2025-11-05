@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}About Us | The Shore House{% endblock %}
+{% block content %}
+
+<!-- HERO -->
+<section class="relative h-56 md:h-72 flex items-center justify-center overflow-hidden">
+  <img src="https://images.unsplash.com/photo-1503264116251-35a269479413" class="absolute inset-0 w-full h-full object-cover" alt="About">
+  <div class="absolute inset-0 hero-tint"></div>
+  <div class="absolute inset-0 bg-black/20"></div>
+
+  <div class="relative z-10 text-center text-white">
+    <h1 class="text-4xl md:text-5xl font-semibold">About The Shore House</h1>
+    <p class="mt-2 text-sm md:text-base text-gray-100 max-w-xl mx-auto">A boutique coastal retreat where warmth, comfort and adventure come together.</p>
+  </div>
+</section>
+
+<!-- THREE ALTERNATING SECTIONS (story / experience / team) -->
+<section class="bg-gray-100 text-slate-800 py-20 space-y-20">
+  <div class="max-w-7xl mx-auto">
+
+    <!-- 1: Our Story -->
+    <div class="wide-section mb-12">
+      <div class="wide-image no-bg h-96 rounded-2xl overflow-hidden">
+        <a href="https://images.unsplash.com/photo-1503264116251-35a269479413" class="glightbox" data-gallery="about-1">
+          <img src="https://images.unsplash.com/photo-1503264116251-35a269479413?w=1600&q=80&auto=format&fit=crop" alt="Our Story">
+        </a>
+        <a href="https://images.unsplash.com/photo-1503264116251-35a269479413" class="glightbox hidden" data-gallery="about-1"></a>
+      </div>
+
+      <div class="wide-content glass-card">
+        <h2 class="text-2xl font-semibold text-slate-800">Our Story</h2>
+        <p class="mt-4 muted">Nestled on the shore, The Shore House began as a family passion — to create a welcoming place for travelers to reconnect with the sea. We focus on thoughtful hospitality, local experiences, and easygoing luxury.</p>
+        <div class="mt-6"><a href="{% url 'contact' %}" class="btn-gold">Contact Us →</a></div>
+      </div>
+    </div>
+
+    <!-- 2: Experiences -->
+    <div class="wide-section md:flex-row-reverse mb-12">
+      <div class="wide-image no-bg h-96 rounded-2xl overflow-hidden">
+         <video autoplay loop muted playsinline class="w-full h-full object-cover">
+      <source src="{% static 'videos/water_act.MOV' %}" type="video/mp4">
+      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" alt="Sea background" class="w-full h-full object-cover">
+    </video>
+        <a href="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c0" class="glightbox hidden" data-gallery="about-2"></a>
+      </div>
+
+      <div class="wide-content glass-card">
+        <h2 class="text-2xl font-semibold text-slate-800">Curated Experiences</h2>
+        <p class="mt-4 muted">From sunrise yoga and coastal bike trails to guided dives and local culinary evenings — our experiences are designed to deepen your connection to the coast and culture.</p>
+        <div class="mt-6"><a href="{% url 'activities:list' %}" class="btn-gold">Explore Activities →</a></div>
+      </div>
+    </div>
+
+    <!-- 3: The Team -->
+    <div class="wide-section mb-12">
+      <div class="wide-image no-bg h-96 rounded-2xl overflow-hidden">
+        <a href="https://images.unsplash.com/photo-1543269865-cbf427effbad" class="glightbox" data-gallery="about-3">
+          <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?w=1600&q=80&auto=format&fit=crop" alt="Team">
+        </a>
+        <a href="https://images.unsplash.com/photo-1543269865-cbf427effbad" class="glightbox hidden" data-gallery="about-3"></a>
+      </div>
+
+      <div class="wide-content glass-card">
+        <h2 class="text-2xl font-semibold text-slate-800">Meet The Team</h2>
+        <p class="mt-4 muted">Our team is local, friendly, and experienced — ready to curate your stay with warm hospitality and helpful local knowledge.</p>
+        <div class="mt-6"><a href="{% url 'rooms:list' %}" class="btn-gold">View Rooms →</a></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% endblock %}

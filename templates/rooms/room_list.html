@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Rooms | The Shore House{% endblock %}
+{% block extra_head %}
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+{% endblock %}
+{% block content %}
+
+<!-- HERO (compact, matching about.html style) -->
+<section class="relative h-56 md:h-72 flex items-center justify-center overflow-hidden">
+  <img src="{% static 'images/rooms_banner.webp' %}" class="absolute inset-0 w-full h-full object-cover" alt="Rooms Banner">
+  <div class="absolute inset-0 hero-tint"></div>
+  <div class="absolute inset-0 bg-black/20"></div>
+
+  <div class="relative z-10 text-center text-white">
+    <h1 class="text-4xl md:text-5xl font-semibold">Our Elegant Home Stay</h1>
+    <p class="mt-2 text-sm md:text-base text-gray-100 max-w-xl mx-auto">
+      Stay in comfort and style — sea-facing rooms that blend modern luxury with serene coastal charm.
+    </p>
+  </div>
+</section>
+
+<!-- ROOM SHOWCASE -->
+<section class="bg-gray-100 text-slate-800 py-20 space-y-20">
+  <div class="max-w-7xl mx-auto space-y-24">
+    {% for room in rooms %}
+      <div id="room-{{ room.id }}" class="flex flex-col md:flex-row {% if forloop.counter|divisibleby:2 %}md:flex-row-reverse{% endif %} items-start gap-10" data-aos="fade-up">
+
+        <!-- IMAGE SLIDER -->
+        <div class="md:w-1/2 rounded-2xl overflow-hidden shadow-lg relative">
+          <div class="swiper roomSwiper" id="swiper-{{ room.id }}">
+            <div class="swiper-wrapper">
+              {% if room.images.all %}
+                {% for img in room.images.all %}
+                  <div class="swiper-slide">
+                    <img src="{{ img.image.url }}" alt="{{ room.name }}" class="w-full h-[28rem] object-cover rounded-2xl">
+                  </div>
+                {% endfor %}
+              {% else %}
+                <div class="swiper-slide">
+                  <img src="https://images.unsplash.com/photo-1501117716987-c8e1ecb210fa?w=1600&q=80&auto=format&fit=crop"
+                       alt="{{ room.name }}" class="w-full h-[28rem] object-cover rounded-2xl">
+                </div>
+              {% endif %}
+            </div>
+
+            <!-- Navigation Arrows -->
+            <div class="swiper-button-next text-yellow-400"></div>
+            <div class="swiper-button-prev text-yellow-400"></div>
+
+            <!-- Pagination Dots -->
+            <div class="swiper-pagination"></div>
+          </div>
+        </div>
+
+        <!-- ROOM DETAILS -->
+        <div class="md:w-1/2 glass-card rounded-3xl p-8 space-y-6 shadow-lg">
+          <h2 class="text-3xl font-semibold text-slate-800">{{ room.name }}</h2>
+          <p class="text-slate-600 leading-relaxed">{{ room.description|linebreaksbr }}</p>
+
+          <!-- Amenities -->
+          <div>
+            <h3 class="text-xl font-semibold text-slate-800 mb-3">Amenities</h3>
+            <ul class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-slate-700 text-sm">
+{#                {% for amenity in room.amenities.all %}#}
+{#                    <li class="flex items-center space-x-2"><span>{{ amenity.icon }}</span><span>{{amenity.name}}</span></li>#}
+{#                    {% endfor %}#}
+              <li class="flex items-center space-x-2"><span>🛏️</span><span>King-size Bed</span></li>
+              <li class="flex items-center space-x-2"><span>🌅</span><span>Sea View Balcony</span></li>
+              <li class="flex items-center space-x-2"><span>📶</span><span>Free Wi-Fi</span></li>
+              <li class="flex items-center space-x-2"><span>☕</span><span>Coffee Maker</span></li>
+              <li class="flex items-center space-x-2"><span>🛁</span><span>Luxury Bath</span></li>
+              <li class="flex items-center space-x-2"><span>❄️</span><span>Air Conditioning</span></li>
+            </ul>
+          </div>
+
+          <!-- Booking Info -->
+          <div class="pt-4 border-t border-gray-200 flex items-center justify-between">
+            <p class="text-lg font-semibold text-slate-700">₹{{ room.price_per_night }} / night</p>
+{#            <a href="{% url 'booking' 'room' room.id %}" class="btn-gold">Book Now →</a>#}
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <p class="text-center text-slate-600">No rooms available right now.</p>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".roomSwiper").forEach((swiperEl) => {
+      new Swiper(swiperEl, {
+        slidesPerView: 1,
+        loop: true,
+        spaceBetween: 10,
+        navigation: {
+          nextEl: swiperEl.querySelector(".swiper-button-next"),
+          prevEl: swiperEl.querySelector(".swiper-button-prev"),
+        },
+        pagination: {
+          el: swiperEl.querySelector(".swiper-pagination"),
+          clickable: true,
+        },
+        autoplay: false,
+        speed: 600,
+      });
+    });
+  });
+</script>
+
+{% endblock %}

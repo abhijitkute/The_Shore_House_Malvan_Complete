@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Booking {{ booking.reference }}{% endblock %}
+{% block content %}
+<h2>Booking {{ booking.reference }}</h2>
+<p>User: {{ booking.user }}</p>
+<p>Amount: ₹{{ booking.final_amount }}</p>
+<p>Paid: {{ booking.paid }}</p>
+<h4>Items</h4>
+<ul>
+  {% for it in booking.items.all %}
+    <li>{{ it.content_object }} x {{ it.quantity }} — ₹{{ it.line_total }}</li>
+  {% endfor %}
+</ul>
+{% endblock %}

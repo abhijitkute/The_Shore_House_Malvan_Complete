@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Payment{% endblock %}
+{% block content %}
+<h2>Payment</h2>
+<div class="text-center mt-4">
+  {% if payment.qr_payload %}
+    <p>Scan the QR code below with any UPI app</p>
+    <img src="data:image/png;base64,{{ payment.qr_payload|default:'' }}" alt="QR" style="width:250px;">
+    <p class="mt-2"><code>{{ payment.qr_payload }}</code></p>
+  {% else %}
+    <p>No QR available. Please pay at counter or use online link.</p>
+  {% endif %}
+</div>
+{% endblock %}

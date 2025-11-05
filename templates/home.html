@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Welcome | The Shore House{% endblock %}
+{% block content %}
+
+<!-- HERO: keep your video but add soft gold tint for brand warmth -->
+<section class="relative text-white py-28 overflow-hidden">
+  <div class="absolute inset-0">
+    <video autoplay loop muted playsinline class="w-full h-full object-cover">
+      <source src="{% static 'banners/home_banner.mp4' %}" type="video/mp4">
+      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" alt="Sea background" class="w-full h-full object-cover">
+    </video>
+    <div class="absolute inset-0 hero-tint"></div>
+    <div class="absolute inset-0 bg-black/30"></div>
+  </div>
+
+  <div class="relative z-10 text-center px-6">
+    <h1 class="text-5xl md:text-6xl font-bold leading-tight">Welcome to <span class="brand-name">The Shore House</span> Malvan</h1>
+    <p class="mt-4 text-lg md:text-xl lead max-w-3xl mx-auto">A refined seaside escape — thoughtful comfort, curated adventures, and sunlit mornings by the ocean.</p>
+    <div class="mt-8">
+      <a  class="btn-gold inline-block">Explore Now</a>
+    </div>
+  </div>
+
+  <!-- 🔹 SOCIAL ICONS ON RIGHT SIDE OF HERO -->
+  <div class="absolute top-1/2 right-6 -translate-y-1/2 flex flex-col items-center gap-5 z-20">
+    <!-- Instagram -->
+    <a href="https://instagram.com/the_shore_house" target="_blank" title="Instagram"
+       class="bg-white/20 hover:bg-yellow-400/80 p-3 rounded-full transition transform hover:scale-110">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-5 h-5 text-white" viewBox="0 0 24 24">
+        <path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9A5.5 5.5 0 0 1 16.5 22h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9A3.5 3.5 0 0 0 20 16.5v-9A3.5 3.5 0 0 0 16.5 4h-9z"/>
+        <path d="M12 7a5 5 0 1 1-5 5 5.006 5.006 0 0 1 5-5zm0 2a3 3 0 1 0 3 3 3 3 0 0 0-3-3z"/>
+        <circle cx="17.5" cy="6.5" r="1.5"/>
+      </svg>
+    </a>
+
+    <!-- Facebook -->
+    <a href="https://facebook.com/the_shore_house" target="_blank" title="Facebook"
+       class="bg-white/20 hover:bg-yellow-400/80 p-3 rounded-full transition transform hover:scale-110">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-5 h-5 text-white" viewBox="0 0 24 24">
+        <path d="M22 12a10 10 0 1 0-11.5 9.87v-7H8v-3h2.5V9.5A3.5 3.5 0 0 1 14 6h3v3h-2a1 1 0 0 0-1 1V12h3l-.5 3H14v7A10 10 0 0 0 22 12z"/>
+      </svg>
+    </a>
+
+    <!-- Location -->
+    <a href="https://maps.google.com/?q=The+Shore+House+Malvan" target="_blank" title="Location"
+       class="bg-white/20 hover:bg-yellow-400/80 p-3 rounded-full transition transform hover:scale-110">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-5 h-5 text-white" viewBox="0 0 24 24">
+        <path d="M12 21.75c4.97-4.96 8.25-8.8 8.25-12.75A8.25 8.25 0 1 0 3.75 9c0 3.95 3.28 7.79 8.25 12.75z"/>
+        <circle cx="12" cy="9" r="2.25" fill="#fff"/>
+      </svg>
+    </a>
+  </div>
+</section>
+
+<!-- Offerings: alternating horizontal full-width sections -->
+<section class="bg-gray-100 text-slate-800 py-20 space-y-20">
+  <!-- 1: Rooms -->
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-8">
+    <div class="md:w-1/2 h-96 overflow-hidden rounded-2xl">
+      <img src="{% static 'images/rooms.JPG' %}" alt="Rooms" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105">
+    </div>
+    <div class="md:w-1/2 p-10 glass-card">
+      <h2 class="text-3xl font-semibold text-slate-800">Beachfront Luxury Rooms</h2>
+      <p class="mt-4 text-slate-600">Wake up to the ocean’s lullaby. Our thoughtfully appointed rooms combine warm materials, soft linens, and panoramic views—perfect for restorative stays.</p>
+      <div class="mt-6"><a href="{% url 'rooms:list' %}" class="btn-gold">View Rooms →</a></div>
+    </div>
+  </div>
+
+  <!-- 2: Activities (reverse) -->
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row-reverse items-center gap-8">
+    <div class="md:w-1/2 h-96 overflow-hidden rounded-2xl">
+      <img src="{% static 'images/Suba.jpeg' %}" alt="Activities" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105">
+    </div>
+    <div class="md:w-1/2 p-10 glass-card">
+      <h2 class="text-3xl font-semibold text-slate-800">Ocean Adventures</h2>
+      <p class="mt-4 text-slate-600">From scuba to jet-skiing, our curated water activities deliver safe excitement and unforgettable views beneath the waves.</p>
+      <div class="mt-6"><a href="{% url 'activities:list' %}" class="btn-gold">Explore Activities →</a></div>
+    </div>
+  </div>
+
+  <!-- 3: Bikes -->
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-8">
+    <div class="md:w-1/2 h-96 overflow-hidden rounded-2xl">
+      <img src="{% static 'images/Scooty.jpg' %}" alt="Bikes" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105">
+    </div>
+    <div class="md:w-1/2 p-10 glass-card">
+      <h2 class="text-3xl font-semibold text-slate-800">Explore on Two Wheels</h2>
+      <p class="mt-4 text-slate-600">Rent a premium bike and discover Malvan’s hidden coves, sea roads, and charming lanes at your leisure.</p>
+      <div class="mt-6"><a href="{% url 'bikes:list' %}" class="btn-gold">See Bikes →</a></div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
